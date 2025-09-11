@@ -1,12 +1,14 @@
 # VS Code copilot prompt 整理
 
 ## Use prompt files in VS Code
-> prompts/: GitHub Copilot 提示檔案
+> **prompts/: GitHub Copilot 提示檔案**
 
-在 Chat view 內使用 `/` 呼叫。For example, `/gitignore-generator`
+> 必須放在 `.github/prompts/` 資料夾下
+
+在 Chat view 內使用 `/` 呼叫。For example, `/<file-name>`
 
 ## Use custom instructions in VS Code
-> instructions/: GitHub Copilot 指令檔案
+> **instructions/: GitHub Copilot 指令檔案**
 
 | Type | Setting name |
 | --- | --- |
