@@ -1,7 +1,5 @@
 ---
 mode: 'agent'
-model: GPT-4o
-tools: []
 description: 'Generate a gitignore file based on user-specified templates.'
 ---
 
