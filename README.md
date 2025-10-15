@@ -14,17 +14,15 @@ Prompt files 預設放在 `.github/prompts/` 資料夾下。你可以透過 VS C
 // .vscode/settings.json
 {
   "chat.promptFilesLocations": {
-    ".github/prompts": true,              // 專案特定的 prompts
-    ".github/prompts-common": true,       // 通用的 prompts
+    ".github/prompts": true,                    // 專案特定的 prompts
+    "<path>": true                              // 其他自訂的 prompts
   }
 }
 ```
 
-詳細說明請參考 [VS Code Prompt Files 文檔](https://code.visualstudio.com/docs/copilot/customization/prompt-files)。
+詳細說明請參考 [VS Code Prompt Files 文件](https://code.visualstudio.com/docs/copilot/customization/prompt-files)。
 
-## Use custom instructions in VS Code
-
-**instructions/: GitHub Copilot 指令檔案**
+## Specify custom instructions in settings
 
 | Type | Setting name |
 | --- | --- |
@@ -41,6 +39,8 @@ Prompt files 預設放在 `.github/prompts/` 資料夾下。你可以透過 VS C
 }
 ```
 
+詳細說明請參考 [VS Code Instructions 文件](https://code.visualstudio.com/docs/copilot/customization/custom-instructions#_specify-custom-instructions-in-settings)。
+
 ## 在多個專案中使用 Git Submodule
 
 如果你想在多個專案中重複使用這些通用的 Copilot 設定，可以使用 Git Submodule 的方式引入。
@@ -55,7 +55,7 @@ git submodule add https://github.com/gn00678465/vscode-copilot-prompts.git .gith
 git commit -m "chore: 加入 copilot prompts submodule"
 ```
 
-**2. 配置 VS Code 設定檔 (`.vscode/settings.json`):**
+**2. 設定 VS Code 設定檔 (`.vscode/settings.json`):**
 
 ```json
 {
