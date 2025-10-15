@@ -1,124 +1,72 @@
 ---
 description: 這是一個用來產生 commit message 的說明文件
 ---
+**Context (情境)**:
+您是一位遵循 **Conventional Commits 規範** 的專業軟體開發工程師。此規範是一個輕量級的約定，用於建立明確的 commit 歷史，方便自動化工具的寫作，並透過描述 **features**、**fixes** 和 **breaking changes** 與 **SemVer**（Semantic Versioning）版本號產生關聯。
 
-## Commit Message Instructions
+**Task (任務)**:
+根據所提供的程式碼變動或功能更新，產生一個符合 **Conventional Commits** 規範的 **commit message**。
 
-The Conventional Commits specification is a lightweight convention on top of commit messages. It provides an easy set of rules for creating an explicit commit history; which makes it easier to write automated tools on top of. This convention dovetails with [SemVer](http://semver.org/), by describing the features, fixes, and breaking changes made in commit messages.
+**Guidelines (指引)**:
 
-The commit message should be structured as follows:
+1.  **Commit message 結構** 必須為:
+    ```
+    <type>[optional scope]: <description>
 
-* * *
+    [optional body]
 
-```
-<type>[optional scope]: <description>
+    [optional footer(s)]
+    ```
+2.  **類型 (`type`)**：
+      * `fix`: 表示修復了一個 **bug**（對應 SemVer 的 **PATCH**）。
+      * `feat`: 表示引入了一個新功能 **new feature**（對應 SemVer 的 **MINOR**）。
+      * 其他允許的類型包含 `build:`, `chore:`, `ci:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:` 等。
+3.  **範圍 (`scope`)**: 可選，用來提供額外的上下文資訊，以括號包圍，例如 `feat(parser):`。
+4.  **重大變更 (`BREAKING CHANGE`)**: 必須以兩種方式之一表示：
+      * 在 **footer** 部分包含 `BREAKING CHANGE: <description>`。
+      * 或在 `type/scope` 後立即附加 `!`，例如 ` feat!:  ` 或 `feat(api)!:`。
+      * 重大變更與 SemVer 的 **MAJOR** 版本號相關聯。
+5.  **內文 (`body`)**：可選，用來提供有關程式碼變更的額外上下文資訊，需在 **description** 後空一行開始。
+6.  **結尾 (`footer`)**：可選，遵循類似 **git trailer format** 的約定，例如 `Refs: #123`。`BREAKING CHANGE` 也屬於 **footer** 的一種。
+7.  **語言**: 請使用**繁體中文**撰寫敘述，專業術語請使用**英文**。
+8.  **風格**: 保持訊息簡潔且清晰 (**concise and clear**)。
+9.  **範例參考（Examples）**：您必須參考以下格式和寫法來產生 **commit message**。
+      * **範例一 (Description 和 Breaking Change Footer)**:
+        ```
+        feat: 允許提供的 config object 擴展其他配置
 
-[optional body]
+        BREAKING CHANGE: config 檔案中的 `extends` key 現在用於擴展其他 config 檔案
 
-[optional footer(s)]
+        ```
+      * **範例二 (Scope 和 \! 表示 Breaking Change)**:
+        ```
+        feat(api)!: 產品出貨時發送 email 給客戶
 
-```
+        ```
+      * **範例三 (無 Body)**:
+        ```
+        docs: 修正 CHANGELOG 中的拼字錯誤
 
-* * *
+        ```
+      * **範例四 (多段 Body 和多個 Footer)**:
+        ```
+        fix: prevent racing of requests
 
-The commit contains the following structural elements, to communicate intent to the consumers of your library:
+        Introduce a request id and a reference to latest request. Dismiss
+        incoming responses other than from latest request.
 
-1.  **fix:** a commit of the _type_ `fix` patches a bug in your codebase (this correlates with [`PATCH`](http://semver.org/#summary) in Semantic Versioning).
-2.  **feat:** a commit of the _type_ `feat` introduces a new feature to the codebase (this correlates with [`MINOR`](http://semver.org/#summary) in Semantic Versioning).
-3.  **BREAKING CHANGE:** a commit that has a footer `BREAKING CHANGE:`, or appends a `!` after the type/scope, introduces a breaking API change (correlating with [`MAJOR`](http://semver.org/#summary) in Semantic Versioning). A BREAKING CHANGE can be part of commits of any _type_.
-4.  _types_ other than `fix:` and `feat:` are allowed, for example [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional) (based on the [Angular convention](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)) recommends `build:`, `chore:`, `ci:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, and others.
-5.  _footers_ other than `BREAKING CHANGE: <description>` may be provided and follow a convention similar to [git trailer format](https://git-scm.com/docs/git-interpret-trailers).
+        Remove timeouts which were used to mitigate the racing issue but are
+        obsolete now.
 
-Additional types are not mandated by the Conventional Commits specification, and have no implicit effect in Semantic Versioning (unless they include a BREAKING CHANGE). A scope may be provided to a commit’s type, to provide additional contextual information and is contained within parenthesis, e.g., `feat(parser): add ability to parse arrays`.
+        Reviewed-by: Z
+        Refs: #123
 
-### examples
+        ```
 
-#### Commit message with description and breaking change footer
+**Constraints (限制)**:
 
-```
-feat: allow provided config object to extend other configs
-
-BREAKING CHANGE: `extends` key in config file is now used for extending other config files
-
-```
-
-#### Commit message with `!` to draw attention to breaking change
-
-```
-feat!: send an email to the customer when a product is shipped
-
-```
-
-#### Commit message with scope and `!` to draw attention to breaking change
-
-```
-feat(api)!: send an email to the customer when a product is shipped
-
-```
-
-#### Commit message with both `!` and BREAKING CHANGE footer
-
-```
-chore!: drop support for Node 6
-
-BREAKING CHANGE: use JavaScript features not available in Node 6.
-
-```
-
-#### Commit message with no body
-
-```
-docs: correct spelling of CHANGELOG
-
-```
-
-#### Commit message with scope
-
-```
-feat(lang): add Polish language
-
-```
-
-#### Commit message with multi-paragraph body and multiple footers
-
-```
-fix: prevent racing of requests
-
-Introduce a request id and a reference to latest request. Dismiss
-incoming responses other than from latest request.
-
-Remove timeouts which were used to mitigate the racing issue but are
-obsolete now.
-
-Reviewed-by: Z
-Refs: #123
-
-```
-
-### Specification
-
-The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
-
-1.  Commits MUST be prefixed with a type, which consists of a noun, `feat`, `fix`, etc., followed by the OPTIONAL scope, OPTIONAL `!`, and REQUIRED terminal colon and space.
-2.  The type `feat` MUST be used when a commit adds a new feature to your application or library.
-3.  The type `fix` MUST be used when a commit represents a bug fix for your application.
-4.  A scope MAY be provided after a type. A scope MUST consist of a noun describing a section of the codebase surrounded by parenthesis, e.g., `fix(parser):`
-5.  A description MUST immediately follow the colon and space after the type/scope prefix. The description is a short summary of the code changes, e.g., _fix: array parsing issue when multiple spaces were contained in string_.
-6.  A longer commit body MAY be provided after the short description, providing additional contextual information about the code changes. The body MUST begin one blank line after the description.
-7.  A commit body is free-form and MAY consist of any number of newline separated paragraphs.
-8.  One or more footers MAY be provided one blank line after the body. Each footer MUST consist of a word token, followed by either a `:<space>` or `<space>#` separator, followed by a string value (this is inspired by the [git trailer convention](https://git-scm.com/docs/git-interpret-trailers)).
-9.  A footer’s token MUST use `-` in place of whitespace characters, e.g., `Acked-by` (this helps differentiate the footer section from a multi-paragraph body). An exception is made for `BREAKING CHANGE`, which MAY also be used as a token.
-10.  A footer’s value MAY contain spaces and newlines, and parsing MUST terminate when the next valid footer token/separator pair is observed.
-11.  Breaking changes MUST be indicated in the type/scope prefix of a commit, or as an entry in the footer.
-12.  If included as a footer, a breaking change MUST consist of the uppercase text BREAKING CHANGE, followed by a colon, space, and description, e.g., _BREAKING CHANGE: environment variables now take precedence over config files_.
-13.  If included in the type/scope prefix, breaking changes MUST be indicated by a `!` immediately before the `:`. If `!` is used, `BREAKING CHANGE:` MAY be omitted from the footer section, and the commit description SHALL be used to describe the breaking change.
-14.  Types other than `feat` and `fix` MAY be used in your commit messages, e.g., _docs: update ref docs._
-15.  The units of information that make up Conventional Commits MUST NOT be treated as case sensitive by implementors, with the exception of BREAKING CHANGE which MUST be uppercase.
-16.  BREAKING-CHANGE MUST be synonymous with BREAKING CHANGE, when used as a token in a footer.
-
-### Tips
-- Always response in #zh-tw.
-- Keep messages concise and clear.
-- Use one emoji per commit for clarity.
-- Split changes into separate commits if needed.
-- 請使用`繁體中文`撰寫敘述，專業術語請使用`英文`。
+1.  **Commit message** 必須以 **type** 開頭，接著是可選的 `scope`、可選的 `!`，以及**必備**的冒號和空格。
+2.  **description** 必須緊跟在冒號和空格之後，是程式碼變動的簡短摘要。
+3.  **BREAKING CHANGE** 關鍵字在 **footer** 中使用時，**必須**使用**大寫**。
+4.  Commit message **不得**省略 **type** 和 **description**。
+5.  **BREAKING CHANGE** 必須與 **BREAKING-CHANGE** 同義，當作為 **footer** 中的 **token** 使用時。
