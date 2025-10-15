@@ -15,7 +15,7 @@ Prompt files 預設放在 `.github/prompts/` 資料夾下。你可以透過 VS C
 {
   "chat.promptFilesLocations": {
     ".github/prompts": true,                    // 專案特定的 prompts
-    "<path>": true                              // 其他自訂的 prompts
+    ".github/prompts-common": true                      // 其他自訂的 prompts
   }
 }
 ```
