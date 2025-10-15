@@ -13,11 +13,10 @@ Prompt files 預設放在 `.github/prompts/` 資料夾下。你可以透過 VS C
 ```json
 // .vscode/settings.json
 {
-  "chat.promptFilesLocations": [
-    ".github/prompts",              // 專案特定的 prompts
-    ".github/prompts-common",       // 通用的 prompts
-    ".github/prompts-team"          // 團隊共用的 prompts
-  ]
+  "chat.promptFilesLocations": {
+    ".github/prompts": true,              // 專案特定的 prompts
+    ".github/prompts-common": true,       // 通用的 prompts
+  }
 }
 ```
 
@@ -60,10 +59,10 @@ git commit -m "chore: 加入 copilot prompts submodule"
 
 ```json
 {
-  "chat.promptFilesLocations": [
-    ".github/prompts",                          // 專案特定的 prompts
-    ".github/copilot-common/prompts"            // 通用的 prompts
-  ],
+  "chat.promptFilesLocations": {
+    ".github/prompts": true,                          // 專案特定的 prompts
+    ".github/copilot-common/prompts": true            // 通用的 prompts
+  },
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
       "file": ".github/copilot-common/instructions/commit-message-generation.instructions.md"
