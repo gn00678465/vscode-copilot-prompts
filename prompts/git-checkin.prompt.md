@@ -41,6 +41,7 @@ description: 'Git Commit Message Generator - Conventional Commits (繁體中文)
 
 5. **Breaking Changes（選用）**：
    - 若有破壞性變更，在 type 後加 `!` 或在 footer 註明 `BREAKING CHANGE:`
+     `type(scope)!: subject for breaking changes`
 
 ## [OUTPUT_FORMAT]
 ```
@@ -60,13 +61,12 @@ description: 'Git Commit Message Generator - Conventional Commits (繁體中文)
 2. 執行 `git diff --staged` 查看已 staged 的變更內容
 3. 分析變更類型和影響範圍
 4. 根據變更內容決定最適合的 commit type
-6. 使用以下指令提交 commit，確保多行訊息正確：
+5. 使用以下指令提交 commit，確保多行訊息正確：
    - 若直接在指令中撰寫，請使用兩個 -m 參數（主旨與內容分開）：
-     `git commit -m "<type>[scope]: <主旨>" -m "- 項目 1\n- 項目 2"`
+     `git commit -m "<type>(scope): <主旨>" -m "- 項目 1" -m "- 項目 2"`
    - 或先將完整訊息寫入檔案，再用 -F 參數提交：
      `git commit -F commit-message.txt`
-6. 使用 git commit 指令提交，message 需符合以上所有規範
-7. 確認 commit 成功後回報結果
+6. 確認 commit 成功後回報結果
 
 ## [EXAMPLES]
 ```
