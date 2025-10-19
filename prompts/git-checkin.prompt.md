@@ -63,7 +63,7 @@ description: 'Git Commit Message Generator - Conventional Commits (繁體中文)
 4. 根據變更內容決定最適合的 commit type
 5. 使用以下指令提交 commit，確保多行訊息正確：
    - 若直接在指令中撰寫，請使用兩個 -m 參數（主旨與內容分開）：
-     `git commit -m "<type>(scope): <主旨>" -m "- 項目 1" -m "- 項目 2"`
+     `git commit -m "<type>(scope): <主旨>" -m "- 項目 1\n- 項目 2"`
    - 或先將完整訊息寫入檔案，再用 -F 參數提交：
      `git commit -F commit-message.txt`
 6. 確認 commit 成功後回報結果
