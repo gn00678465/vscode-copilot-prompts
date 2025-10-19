@@ -41,7 +41,7 @@ description: 'Git Commit Message Generator - Conventional Commits (繁體中文)
 
 5. **Breaking Changes（選用）**：
    - 若有破壞性變更，在 type 後加 `!` 或在 footer 註明 `BREAKING CHANGE:`
-     `type(scope)!: subject for breaking changes`
+     `type(scope)!: 使用繁體中文的主旨`
 
 ## [OUTPUT_FORMAT]
 ```
