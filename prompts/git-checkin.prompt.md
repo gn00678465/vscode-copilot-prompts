@@ -45,7 +45,7 @@ description: 'Git Commit Message Generator - Conventional Commits (繁體中文)
 
 ## [OUTPUT_FORMAT]
 ```
-<type>[optional scope]: <description in Traditional Chinese>
+<type>(optional scope): <description in Traditional Chinese>
 
 [optional body in Traditional Chinese]
 - <變更 1>
