@@ -3,7 +3,7 @@ mode: 'agent'
 description: 'Git Commit Message Generator - Conventional Commits (繁體中文)'
 ---
 ## [GOAL_OF_THE_PROMPT]
-分析當前 git repository 的 staged changes，根據 Conventional Commits 規範自動生成符合規範的 commit message，並執行 git commit。Commit message 的描述部分必須使用繁體中文撰寫。
+分析當前 git repository 的 staged changes，根據 Conventional Commits 規範自動生成符合規範的 commit message，並輸出用於提交的完整 git commit 指令。Commit message 的描述部分必須使用繁體中文撰寫。
 
 ## [TONE_AND_AUDIENCE]
 - 目標受眾：繁體中文使用者的開發團隊
@@ -11,6 +11,7 @@ description: 'Git Commit Message Generator - Conventional Commits (繁體中文)
 - 文化考量：使用台灣慣用的技術用語和表達方式
 
 ## [CONTENT_CONSTRAINTS]
+**Commit Message 的組成順序為：Type(Scope): Subject**
 1. **Commit Type（必須為英文）**：
    - `feat`: 新增功能
    - `fix`: 修復錯誤
@@ -57,21 +58,29 @@ description: 'Git Commit Message Generator - Conventional Commits (繁體中文)
 ```
 
 ## [EXECUTION_STEPS]
-1. 執行 `git status` 檢查當前狀態
-2. 執行 `git diff --staged` 查看已 staged 的變更內容
-3. 分析變更類型和影響範圍
-4. 根據變更內容決定最適合的 commit type
-5. 使用以下指令提交 commit，確保多行訊息正確：
-   - 若直接在指令中撰寫，請使用兩個 -m 參數（主旨與內容分開）：
-     `git commit -m "<type>(scope): <主旨>" -m "- 項目 1\n- 項目 2"`
-   - 或先將完整訊息寫入檔案，再用 -F 參數提交：
-     `git commit -F commit-message.txt`
-6. 確認 commit 成功後回報結果
-7. 移除 commit-message.txt 檔案（如有使用），請依照作業系統執行下列指令：
-   - macOS/Linux: `rm -f commit-message.txt`
-   - Windows (CMD): `del commit-message.txt`
-   - Windows (PowerShell): `Remove-Item -Force commit-message.txt`
-   - （或於 commit 時直接串接：`git commit -F commit-message.txt && rm -f commit-message.txt`）
+
+1. **取得變更資訊：**
+   - 執行 `git status` 檢查當前狀態。
+   - 執行 `git diff --staged` 查看已 staged 的變更內容。
+
+2. **檢查分支與決定行為：**
+   - **請判斷**當前分支是否為 `main` 或 `master`。
+   - **情況 A (安全分支)：** 若當前**不是** `main` 或 `master` 分支，則繼續執行步驟 3。
+   - **情況 B (主分支)：** 若當前**是** `main` 或 `master` 分支：
+     - **停止**後續的 `git commit` 操作。
+     - 依據步驟 1 取得的變更內容，建議一個符合規範的**新分支名稱**（例如：`feat/login-form-validation`）。
+     - **回報錯誤**並建議使用者：`請先切換至建議的分支 (或自訂分支) 後，再執行 commit。`
+
+3. **生成 Commit Message 與指令 (僅在情況 A 執行)：**
+   - 分析變更類型和影響範圍。
+   - 根據變更內容決定最適合的 commit type。
+   - **輸出**完整的 Commit Message（包含 Type, Scope, Subject, Body）。
+   - **輸出**建議用於提交的 `git commit -m` 指令（確保多行訊息正確）。
+
+4. **後續清理指示 (僅在情況 A 執行，且使用 -F 提交時)：**
+   - 如果步驟 3 建議使用 `-F commit-message.txt` 方式提交，請**輸出**以下指令給使用者，用於提交後清除檔案：
+     - macOS/Linux: `git commit -F commit-message.txt && rm -f commit-message.txt`
+     - Windows: `請使用者執行 git commit -F commit-message.txt 後，手動執行移除指令。`
 
 ## [EXAMPLES]
 ```
@@ -97,3 +106,7 @@ chore: 設定 ESLint 樣式規則與自動修復功能
 - 新增 lint:fix 腳本至 package.json
 - 更新 ESLint 與 TypeScript 相關套件至最新版本
 ```
+
+## [CONSTRAINTS]
+
+- 只有在 staged 狀態的變更會被考慮
