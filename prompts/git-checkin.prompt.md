@@ -1,5 +1,5 @@
 ---
-mode: 'agent'
+agent: 'agent'
 description: 'Git Commit Message Generator - Conventional Commits (繁體中文)'
 ---
 ## [GOAL_OF_THE_PROMPT]
