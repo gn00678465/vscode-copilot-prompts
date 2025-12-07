@@ -10,6 +10,17 @@ argument-hint: 目標分支名稱（預設：main）
 
 請依照以下步驟執行：
 
+0. 起始條件：確認當前分支位於遠端（online）上，否則停止後續動作並回報錯誤：
+    - 檢查目前分支名稱：
+       ```
+       git rev-parse --abbrev-ref HEAD
+       ```
+    - 檢查分支是否存在於遠端（範例）：
+       ```
+       git ls-remote --heads origin $(git rev-parse --abbrev-ref HEAD)
+       ```
+       若上述指令無輸出，代表當前分支尚未推上遠端，請先執行 `git push -u origin <branch>` 或切換至已在遠端的分支再試。
+
 1. 取得當前分支相對於目標分支的 commits：
    ```
    git --no-pager log --oneline <目標分支>..<當前分支>
